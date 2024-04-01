@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class TwoPhaseTermination {
 
     public static void main(String[] args) {
-        TwoStageTerminationMode two = new TwoStageTerminationMode();
+        TwoPhaseTerminationMode two = new TwoPhaseTerminationMode();
         two.start();
         try {
             TimeUnit.MILLISECONDS.sleep(3500);
@@ -26,7 +26,7 @@ public class TwoPhaseTermination {
 }
 
 @Slf4j
-class TwoStageTerminationMode {
+class TwoPhaseTerminationMode {
     private Thread monitor;
 
     /**
