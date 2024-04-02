@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 public class BusinessLogRequest implements Serializable {
 
-    private static final long serialVersionUID = -3694576082704800623L;
+    private static final long serialVersionUID = -5155950549041314758L;
 
     /**
      * 操作日志主键id

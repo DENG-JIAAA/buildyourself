@@ -21,7 +21,7 @@ public class TwoPhaseTermination {
             log.error("主线程中断::", e);
         }
         two.stop();
-        log.debug("主线程后续操作");
+        log.info("主线程后续操作");
     }
 }
 
@@ -37,12 +37,12 @@ class TwoPhaseTerminationMode {
             while (true) {
                 Thread current = Thread.currentThread();
                 if (current.isInterrupted()) {
-                    log.debug("监控中断后操作");
+                    log.info("监控中断后操作");
                     break;
                 }
                 try {
                     TimeUnit.MILLISECONDS.sleep(1000);
-                    log.debug("监控进行中");
+                    log.info("监控进行中");
                 } catch (InterruptedException e) {
                     log.error("监控中断::", e);
                     // 重新设置打断标记

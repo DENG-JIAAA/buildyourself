@@ -19,17 +19,17 @@ public class ParkThread {
     static void park() {
         Thread thread = new Thread(() -> {
             Thread currentThread = Thread.currentThread();
-            log.debug("{}线程开始运行...", currentThread.getName());
-            log.debug("park");
+            log.info("{}线程开始运行...", currentThread.getName());
+            log.info("park");
             LockSupport.park();
-            log.debug("unpark");
-            // log.debug("{}中断状态::{}", currentThread.getName(), currentThread.isInterrupted());
+            log.info("unpark");
+            // log.info("{}中断状态::{}", currentThread.getName(), currentThread.isInterrupted());
 
             /* interrupted()，判断当前线程是否被打断，并且清除打断标记。 */
-            log.debug("{}中断状态::{}", currentThread.getName(), Thread.interrupted());
+            log.info("{}中断状态::{}", currentThread.getName(), Thread.interrupted());
 
             LockSupport.park();
-            log.debug("unpark");
+            log.info("unpark");
         }, "Thread01");
         thread.start();
 
