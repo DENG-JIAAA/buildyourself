@@ -43,6 +43,8 @@
         <alibaba.fastjson.version>2.0.48</alibaba.fastjson.version> <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
         <github.jsqlparser.version>4.4</github.jsqlparser.version> <!-- TODO https://mvnrepository.com/artifact/com.github.jsqlparser/jsqlparser -->
         <jsonpath.version>2.9.0</jsonpath.version> <!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path -->
+        <logback.classic.version>1.5.3</logback.classic.version> <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+        <logback.core.version>1.5.3</logback.core.version> <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
         <buildyourself.version>1.0</buildyourself.version>
     </properties>
 
@@ -86,6 +88,21 @@
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${springframework.boot.version}</version>
             </dependency>
+
+            <!-- Logback-Classic -->
+            <!-- <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.classic.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            &lt;!&ndash; Logback-Core &ndash;&gt;
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.core.version}</version>
+            </dependency> -->
 
             <!-- SpringFramework-Core -->
             <dependency>
@@ -158,6 +175,7 @@
                 <version>${mybatis.version}</version>
             </dependency>
 
+            <!-- Persistence-Api -->
             <dependency>
                 <groupId>javax.persistence</groupId>
                 <artifactId>persistence-api</artifactId>
@@ -227,6 +245,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
         </dependency>
 
         <dependency>

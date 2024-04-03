@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @Author: DengJia
  * @Date: 2024-04-01 20:10
- * @Description: 两阶段终止模式
+ * @Description: 两阶段终止模式，可使用此模式来代替线程的stop()。
  */
 @Slf4j
 public class TwoPhaseTermination {
