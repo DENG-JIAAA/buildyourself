@@ -3,12 +3,14 @@ package top.dj.model.businesslog.domain.response;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
 public class BusinessLogResponse implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -3942550526301947704L;
 
     /**

@@ -4,6 +4,7 @@ package top.dj.model.business.domain.entity;
 import lombok.Data;
 
 import javax.persistence.Table;
+import java.io.Serial;
 import java.io.Serializable;
 
 import java.util.Date;
@@ -11,9 +12,10 @@ import java.math.BigDecimal;
 
 
 @Data
-@Table(name = "company_info")
-public class CompanyInfo implements Serializable {
+@Table(name = "company")
+public class Company implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -5473286164934800322L;
 
     /**

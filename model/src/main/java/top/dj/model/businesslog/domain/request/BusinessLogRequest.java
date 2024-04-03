@@ -2,12 +2,14 @@ package top.dj.model.businesslog.domain.request;
 
 import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
 public class BusinessLogRequest implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -5155950549041314758L;
 
     /**

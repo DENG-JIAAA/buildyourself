@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,6 +13,7 @@ import java.util.Date;
 @Table(name = "business_log")
 public class BusinessLog implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 7352050262923756969L;
 
     /**
