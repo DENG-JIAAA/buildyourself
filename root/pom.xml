@@ -22,14 +22,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <springboot.version>3.2.4</springboot.version>
-        <mybatisplus.version>3.5.5</mybatisplus.version>
+        <springframework.boot.version>3.2.4</springframework.boot.version>
+        <springframework.version>6.1.5</springframework.version>
+        <springframeworkjsonpath.version>6.1.5</springframeworkjsonpath.version>
         <mysqlconnectjava.version>8.0.33</mysqlconnectjava.version>
-        <druid.version>1.2.22</druid.version>
-        <lombok.version>1.18.32</lombok.version>
+        <alibaba.druid.version>1.2.22</alibaba.druid.version>
+        <baomidou.mybatisplus.version>3.5.5</baomidou.mybatisplus.version>
+        <mybatis.spring.version>3.0.3</mybatis.spring.version>
+        <mybatis.version>3.5.15</mybatis.version>
+        <projectlombok.version>1.18.32</projectlombok.version>
         <hutool.version>5.8.27</hutool.version>
+        <logback.version>1.5.3</logback.version>
+        <jsonpath.version>2.9.0</jsonpath.version>
         <buildyourself.version>1.0</buildyourself.version>
-        <logback.version>1.4.14</logback.version>
     </properties>
 
     <dependencyManagement>
@@ -38,15 +43,34 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
-                <version>${springboot.version}</version>
+                <version>${springframework.boot.version}</version>
+            </dependency>
+
+            <!-- SpringFramework -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${springframework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${springframework.version}</version>
             </dependency>
 
             <!-- SpringBoot-Test -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
-                <version>${springboot.version}</version>
+                <version>${springframework.boot.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <!-- json-path -->
+            <dependency>
+                <groupId>com.jayway.jsonpath</groupId>
+                <artifactId>json-path</artifactId>
+                <version>${jsonpath.version}</version>
             </dependency>
 
             <!-- MySQL-JAVA -->
@@ -60,22 +84,44 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-jdbc</artifactId>
-                <version>${springboot.version}</version>
+                <version>${springframework.boot.version}</version>
             </dependency>
 
             <!-- Druid -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid.version}</version>
+                <version>${alibaba.druid.version}</version>
             </dependency>
 
             <!-- MyBatis-Plus -->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatisplus.version}</version>
+                <version>${baomidou.mybatisplus.version}</version>
             </dependency>
+
+            <!-- MyBatis-Spring -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis.spring.version}</version>
+            </dependency>
+
+            <!-- MyBatis -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <!-- MyBatis Mapper -->
+            <!-- <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper</artifactId>
+                <version>4.2.3</version>
+            </dependency> -->
+
 
             <!-- 项目 Model -->
             <dependency>
@@ -84,18 +130,11 @@
                 <version>${buildyourself.version}</version>
             </dependency>
 
-            <!-- 业务 Log -->
-            <dependency>
-                <groupId>top.dj</groupId>
-                <artifactId>businesslog</artifactId>
-                <version>${buildyourself.version}</version>
-            </dependency>
-
             <!-- Lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
+                <version>${projectlombok.version}</version>
                 <scope>provided</scope>
             </dependency>
 
@@ -105,6 +144,13 @@
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+
+            <!-- 业务 Log -->
+            <dependency>
+                <groupId>top.dj</groupId>
+                <artifactId>businesslog</artifactId>
+                <version>${buildyourself.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -113,7 +159,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${springboot.version}</version>
+                <version>${springframework.boot.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
