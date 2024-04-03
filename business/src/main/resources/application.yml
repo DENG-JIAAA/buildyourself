@@ -9,7 +9,7 @@ spring:
         password: 123456
 
 mybatis-plus:
-    config-location: classpath:mybatis/sqlMapConfig.xml
+    config-location: classpath:mybatis/mybatis-config.xml
 
 business:
     log:
