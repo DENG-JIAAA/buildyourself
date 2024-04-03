@@ -33,6 +33,11 @@
         </dependency>
 
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
@@ -43,13 +48,29 @@
         </dependency>
 
         <dependency>
-            <groupId>top.dj</groupId>
-            <artifactId>model</artifactId>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>top.dj</groupId>
+            <artifactId>model</artifactId>
+        </dependency>
+
+        <!-- 业务 Log -->
+        <dependency>
+            <groupId>top.dj</groupId>
+            <artifactId>businesslog</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -111,14 +111,12 @@ public class SqlTools {
             connection = dataSource.getConnection();
             schema = connection.getCatalog();
         } catch (SQLException e) {
-            e.printStackTrace();
             log.error("SqlTools::获取数据库连接异常:", e);
         } finally {
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException e) {
-                    e.printStackTrace();
                     log.error("SqlTools::关闭数据库连接异常:", e);
                 }
             }

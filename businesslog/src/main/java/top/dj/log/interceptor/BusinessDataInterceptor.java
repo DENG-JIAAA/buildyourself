@@ -41,8 +41,8 @@ import static top.dj.model.businesslog.enums.RecordOperationTypeEnum.*;
 
 
 /**
- * @description: MyBatis - 敏感数据变更拦截器，记录数据的变化情况。（http://git.oschina.net/free/Mybatis_PageHelper）
- * @version: VERSION
+ * @description: MyBatis - 业务数据变更拦截器，记录数据的变化情况。（https://blog.csdn.net/wind_chasing_boy/article/details/130230335）
+ * @version: 1.0
  * @date: 2024/3/9 10:55
  * @param: null
  * @return: {@link null}
@@ -51,23 +51,23 @@ import static top.dj.model.businesslog.enums.RecordOperationTypeEnum.*;
 @Slf4j
 @Component
 @Intercepts({@Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class})})
-public class SensitiveDataInterceptor implements Interceptor {
+public class BusinessDataInterceptor implements Interceptor {
     private static final String PROD = "prod";
     private static final String COMPANY = "company";
-    private static final String LOG_SCHEMA_TABLE = "test3_bigdata.record_operation_log_master";
-    private static final String LOG_SCHEMA_TABLE_PROD = "db_bigdata_center.record_operation_log_master";
+    private static final String LOG_SCHEMA_TABLE = "db.business_log";
+    private static final String LOG_SCHEMA_TABLE_PROD = "db.business_log";
     private static final Map<String, String> DEV_PROD_DB_MAP;
-    private static final String
-            DEV_URL = "jdbc:mysql://smarthse.51vip.biz:3306/test3_bigdata?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&zeroDateTimeBehavior=CONVERT_TO_NULL",
-            DEV_USERNAME = "ehs-root2",
-            DEV_PASSWORD = "test1234567",
-            PROD_URL = "jdbc:mysql://c9dv54sl9wauss9c8aym-rw4rm.maxscale.rds.internet.cloud-inner.zj.gov.cn:3306/db_bigdata_center?serverTimezone=Asia/Shanghai",
-            PROD_USERNAME = "admin_ra",
-            PROD_PASSWORD = "yA%GRe5r$Ux5B^QK";
+    private static final String DEV_URL = "jdbc:mysql://127.0.0.1:3306/db?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&allowMultiQueries=true";
+    private static final String DEV_USERNAME = "root";
+    private static final String DEV_PASSWORD = "123456";
+    private static final String PROD_URL = "??";
+    private static final String PROD_USERNAME = "??";
+    private static final String PROD_PASSWORD = "??";
 
     static {
+        // DEV_PROD_DB_MAP，K/V存放：开发/生产 环境的库名映射（应对开发/生产环境 库名不一致的情况）。
         Map<String, String> dbMap = new HashMap<>();
-        dbMap.put("test3_bigdata", "db_bigdata_center");
+        dbMap.put("db", "db");
         DEV_PROD_DB_MAP = dbMap;
     }
 
@@ -117,8 +117,9 @@ public class SensitiveDataInterceptor implements Interceptor {
      * @param invocation 拦截参数
      */
     private void doLog(Invocation invocation) {
-        // boolean skip = "true".equals(RpcContext.getContext().getAttachments().get("skip_sensitive_log"));
-        if (true) {
+        boolean skip = Boolean.FALSE;
+        // skip = "true".equals(RpcContext.getContext().getAttachments().get("skip_sensitive_log"));
+        if (skip) {
             return;
         }
         // 获取方法参数
@@ -136,8 +137,7 @@ public class SensitiveDataInterceptor implements Interceptor {
                 String sql = SqlTools.showSql(configuration, boundSql);
                 Statement statement = CCJSqlParserUtil.parse(sql);
                 List<BusinessLog> logList = new ArrayList<>();
-                if (statement instanceof Update) {
-                    Update update = (Update) statement;
+                if (statement instanceof Update update) {
                     List<String> updateEntryList = new ArrayList<>();
                     Map<String, Object> updateColumnMap = new HashMap<>();
                     for (UpdateSet updateSet : update.getUpdateSets()) {
@@ -208,12 +208,10 @@ public class SensitiveDataInterceptor implements Interceptor {
                         }
                     }
                 }
-                if (statement instanceof Insert) {
-                    Insert insert = (Insert) statement;
+                if (statement instanceof Insert insert) {
                     if (COMPANY.equals(tName)) {
-                        // RpcContext context = RpcContext.getContext();
-                        // String ip = context.getAttachments().get("ip_addr");
-                        // String op = context.getAttachments().get("operator_id");
+                        // String ip = RpcContext.getContext().getAttachments().get("ip_addr");
+                        // String op = RpcContext.getContext().getAttachments().get("operator_id");
                         // 获取插入的列名和对应的值 存入 Map 中
                         List<Map<String, Object>> insertMapList = new ArrayList<>();
                         List<Column> columnList = insert.getColumns();

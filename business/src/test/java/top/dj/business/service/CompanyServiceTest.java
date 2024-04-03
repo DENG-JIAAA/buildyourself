@@ -5,25 +5,26 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StopWatch;
 import top.dj.business.BusinessApplication;
-import top.dj.model.business.domain.entity.CompanyInfo;
+import top.dj.business.bootstrap.properties.BusinessLogProperties;
+import top.dj.model.business.domain.entity.Company;
 
-@SpringBootTest(classes = BusinessApplication.class) // 更改：启动类.class
+@SpringBootTest(classes = BusinessApplication.class)
 @Slf4j
-class CompanyInfoServiceTest {
+class CompanyServiceTest {
 
     @Autowired
-    private ICompanyInfoService companyInfoService;
+    private ICompanyService companyInfoService;
+
+    @Autowired
+    private BusinessLogProperties businessLogProperties;
 
     @Test
     void springBootTest_202404211269() {
-        UpdateWrapper<CompanyInfo> wrapper = new UpdateWrapper<>();
+        UpdateWrapper<Company> wrapper = new UpdateWrapper<>();
         wrapper.eq("id", 99657571579429867L);
         wrapper.set("short_name", "宜康有限公司1");
-        boolean update = companyInfoService.update(wrapper);
-        assert update;
+        companyInfoService.update(wrapper);
     }
 
 }

@@ -4,8 +4,15 @@ spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
         type: com.alibaba.druid.pool.DruidDataSource
-#        url: jdbc:mysql://127.0.0.1:3306/db?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true
         url: jdbc:mysql://127.0.0.1:3306/db?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&allowMultiQueries=true
         username: root
         password: 123456
 
+mybatis-plus:
+    config-location: classpath:mybatis/sqlMapConfig.xml
+
+business:
+    log:
+        busi-log-enable: true
+        busi-log-online-or-offline-env: dev
+        busi-log-record-keys: db.company.name,db.company.short_name
