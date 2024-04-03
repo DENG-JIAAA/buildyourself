@@ -12,20 +12,17 @@
     <artifactId>businesslog</artifactId>
     <version>1.0</version>
     <name>businesslog</name>
-    <description>businesslog</description>
+    <description>业务操作日志</description>
 
     <properties>
-        <java.version>21</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>${project.java.version}</java.version>
+        <maven.compiler.source>${project.java.version}</maven.compiler.source>
+        <maven.compiler.target>${project.java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -47,14 +44,8 @@
         </dependency>
 
         <dependency>
-            <groupId>top.dj</groupId>
-            <artifactId>model</artifactId>
-        </dependency>
-
-        <dependency>
             <artifactId>jsqlparser</artifactId>
             <groupId>com.github.jsqlparser</groupId>
-            <version>4.4</version>
         </dependency>
     </dependencies>
 

@@ -18,25 +18,66 @@
     <description>项目根模块，统一管理依赖配置项。</description>
 
     <properties>
-        <java.version>21</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.java.version>21</project.java.version>
+        <project.encoding>UTF-8</project.encoding>
 
-        <springframework.boot.version>3.2.4</springframework.boot.version>
-        <springframework.version>6.1.5</springframework.version>
-        <springframeworkjsonpath.version>6.1.5</springframeworkjsonpath.version>
-        <mysqlconnectjava.version>8.0.33</mysqlconnectjava.version>
-        <alibaba.druid.version>1.2.22</alibaba.druid.version>
-        <baomidou.mybatisplus.version>3.5.5</baomidou.mybatisplus.version>
-        <mybatis.spring.version>3.0.3</mybatis.spring.version>
-        <mybatis.version>3.5.15</mybatis.version>
-        <projectlombok.version>1.18.32</projectlombok.version>
-        <hutool.version>5.8.27</hutool.version>
-        <logback.version>1.5.3</logback.version>
-        <jsonpath.version>2.9.0</jsonpath.version>
+        <java.version>${project.java.version}</java.version>
+        <maven.compiler.source>${project.java.version}</maven.compiler.source>
+        <maven.compiler.target>${project.java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
+
+        <springframework.boot.version>3.2.4</springframework.boot.version> <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+        <springframework-core.version>6.1.5</springframework-core.version> <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+        <springframework-web.version>6.1.5</springframework-web.version> <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+        <mysqlconnectjava.version>8.0.33</mysqlconnectjava.version> <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <alibaba.druid.version>1.2.22</alibaba.druid.version> <!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter -->
+        <baomidou.mybatisplus.version>3.5.5</baomidou.mybatisplus.version> <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
+        <mybatis.spring.version>3.0.3</mybatis.spring.version> <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+        <mybatis.version>3.5.15</mybatis.version> <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+        <persistence.api.version>1.0.2</persistence.api.version> <!-- https://mvnrepository.com/artifact/javax.persistence/persistence-api -->
+        <projectlombok.version>1.18.32</projectlombok.version> <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <springfox.swagger2.version>3.0.0</springfox.swagger2.version> <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+        <springfox.swagger.ui.version>3.0.0</springfox.swagger.ui.version> <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+        <hutool.version>5.8.27</hutool.version> <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
+        <alibaba.fastjson.version>2.0.48</alibaba.fastjson.version> <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <github.jsqlparser.version>4.4</github.jsqlparser.version> <!-- TODO https://mvnrepository.com/artifact/com.github.jsqlparser/jsqlparser -->
+        <jsonpath.version>2.9.0</jsonpath.version> <!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path -->
         <buildyourself.version>1.0</buildyourself.version>
     </properties>
 
+    <!--
+        scope
+            - compile
+                - 默认作用域
+                - [编译|测试|运行]，这些状态均是可用的
+                - 参与打包
+                - 传递依赖（该依赖会传递给依赖该模块的其他模块）
+            - provided
+                - [编译|测试]
+                - 不参与打包
+                - 非传递依赖
+            - runtime
+                - [测试|运行]
+                - 参与打包
+                - 传递依赖
+            - test
+                - [测试]
+                - 不参与打包
+                - 非传递依赖
+            - import
+                - 关联dependencyManagement使用
+                - 依赖pom时使用
+            - system
+                - 系统级作用域
+
+        dependencyManagement
+            - 父模块：仅声明，不引入
+            - 子模块：显示引入，可不指定version，可不指定scope
+
+        dependencies
+            - 引入依赖项
+    -->
     <dependencyManagement>
         <dependencies>
             <!-- SpringBoot -->
@@ -46,16 +87,18 @@
                 <version>${springframework.boot.version}</version>
             </dependency>
 
-            <!-- SpringFramework -->
+            <!-- SpringFramework-Core -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>${springframework.version}</version>
+                <version>${springframework-core.version}</version>
             </dependency>
+
+            <!-- SpringFramework-Web -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-web</artifactId>
-                <version>${springframework.version}</version>
+                <version>${springframework-web.version}</version>
             </dependency>
 
             <!-- SpringBoot-Test -->
@@ -115,19 +158,31 @@
                 <version>${mybatis.version}</version>
             </dependency>
 
-            <!-- MyBatis Mapper -->
-            <!-- <dependency>
-                <groupId>tk.mybatis</groupId>
-                <artifactId>mapper</artifactId>
-                <version>4.2.3</version>
-            </dependency> -->
-
-
-            <!-- 项目 Model -->
             <dependency>
-                <groupId>top.dj</groupId>
-                <artifactId>model</artifactId>
-                <version>${buildyourself.version}</version>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>${persistence.api.version}</version>
+            </dependency>
+
+            <!-- HuTool -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- Alibaba Fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${alibaba.fastjson.version}</version>
+            </dependency>
+
+            <!-- jsqlparser -->
+            <dependency>
+                <groupId>com.github.jsqlparser</groupId>
+                <artifactId>jsqlparser</artifactId>
+                <version>${github.jsqlparser.version}</version>
             </dependency>
 
             <!-- Lombok -->
@@ -138,39 +193,60 @@
                 <scope>provided</scope>
             </dependency>
 
-            <!-- HuTool -->
+            <!-- Springfox-Swagger2 -->
             <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox.swagger2.version}</version>
             </dependency>
 
-            <!-- 业务 Log -->
+            <!-- Springfox-Swagger-UI -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox.swagger.ui.version}</version>
+            </dependency>
+
+            <!-- 业务日志 -->
             <dependency>
                 <groupId>top.dj</groupId>
                 <artifactId>businesslog</artifactId>
                 <version>${buildyourself.version}</version>
             </dependency>
+
+            <!-- 项目模型 -->
+            <dependency>
+                <groupId>top.dj</groupId>
+                <artifactId>model</artifactId>
+                <version>${buildyourself.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${springframework.boot.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <!-- <source>21</source> -->
-                    <!-- <target>21</target> -->
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>top.dj</groupId>
+            <artifactId>model</artifactId>
+        </dependency>
+    </dependencies>
 </project>
