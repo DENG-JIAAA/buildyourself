@@ -21,7 +21,7 @@ public class DaemonThread {
                 }
             }
             log.info("分支线程结束");
-        });
+        }, "Thread_01");
         thread.setDaemon(Boolean.TRUE);
         thread.start();
         log.info("主线程结束");
